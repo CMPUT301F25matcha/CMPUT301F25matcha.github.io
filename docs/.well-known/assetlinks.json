@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.example.lotterysystemproject",
+    "sha256_cert_fingerprints":
+    ["C1:E0:10:23:A7:41:1F:62:A6:50:38:DF:04:F9:28:E6:1C:CD:7E:87:65:44:87:E1:61:D5:DF:45:24:7B:72:B6"]
+  }
+}]
