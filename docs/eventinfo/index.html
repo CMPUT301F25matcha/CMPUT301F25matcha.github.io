@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download App Now (Dark Theme)</title>
-    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <title>Lottery System - Event Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom font import for a modern look */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
         body {
             font-family: 'Inter', sans-serif;
@@ -14,23 +13,47 @@
     </style>
 </head>
 <body class="bg-gray-900 flex items-center justify-center min-h-screen p-4">
-
-    <!-- Main Container Card --><div class="w-full max-w-lg bg-gray-800 text-white rounded-3xl shadow-2xl p-8 sm:p-12 text-center transform transition duration-500 hover:scale-[1.02] border-2 border-blue-600">
+    <div class="w-full max-w-lg bg-gray-800 text-white rounded-3xl shadow-2xl p-8 sm:p-12 text-center border-2 border-blue-600">
         
-        <!-- Large, prominent text --><h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight text-blue-400">
-            Go download the app!
+        <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight text-blue-400">
+            Opening Event...
         </h1>
-
-        <!-- Subtext/Call to action suggestion --><p class="mt-4 text-gray-300 text-lg sm:text-xl font-medium">
-            Tap below to get started and explore all the features.
+        
+        <p class="mt-4 text-gray-300 text-lg sm:text-xl font-medium">
+            Opening in Lottery System app...
         </p>
-
-        <!-- Placeholder Button (Example of where a real download link would go) --><div class="mt-8">
-            <a href="#" class="inline-block px-10 py-4 bg-blue-600 text-white font-bold text-xl uppercase rounded-full shadow-lg hover:bg-blue-700 transition duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-blue-500">
+        
+        <div id="fallback" class="mt-8 hidden">
+            <p class="text-gray-400 mb-4">App not installed?</p>
+            <a href="#" id="download-link" class="inline-block px-10 py-4 bg-blue-600 text-white font-bold text-xl uppercase rounded-full shadow-lg hover:bg-blue-700 transition duration-300">
                 Download Now
             </a>
         </div>
         
     </div>
+
+    <script>
+        // Get eventId from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const eventId = urlParams.get('eventId');
+        
+        if (eventId) {
+            // Try to open the app with custom scheme
+            const customUri = `lotterysystem://event?eventId=${eventId}`;
+            const httpsUri = `https://cmput301f25matcha.github.io/eventinfo?eventId=${eventId}`;
+            
+            // Try custom scheme first (more reliable)
+            window.location.href = customUri;
+            
+            // Fallback: show download button after 3 seconds if app didn't open
+            setTimeout(() => {
+                document.getElementById('fallback').classList.remove('hidden');
+            }, 3000);
+        } else {
+            document.getElementById('fallback').classList.remove('hidden');
+            document.querySelector('h1').textContent = 'Invalid Event Link';
+            document.querySelector('p').textContent = 'No event ID provided.';
+        }
+    </script>
 </body>
 </html>
